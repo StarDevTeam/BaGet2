@@ -3,35 +3,24 @@
   "defaultProvider": "unpkg",
   "libraries": [
     {
-      "library": "bootstrap@3.4.1",
+      "library": "bootstrap@5.3.2",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [
-        "dist/css/bootstrap-theme.css",
-        "dist/css/bootstrap-theme.css.map",
-        "dist/css/bootstrap-theme.min.css",
-        "dist/css/bootstrap-theme.min.css.map",
         "dist/css/bootstrap.css",
         "dist/css/bootstrap.css.map",
         "dist/css/bootstrap.min.css",
         "dist/css/bootstrap.min.css.map",
-        "dist/fonts/glyphicons-halflings-regular.eot",
-        "dist/fonts/glyphicons-halflings-regular.svg",
-        "dist/fonts/glyphicons-halflings-regular.ttf",
-        "dist/fonts/glyphicons-halflings-regular.woff",
-        "dist/fonts/glyphicons-halflings-regular.woff2",
         "dist/js/bootstrap.js",
-        "dist/js/bootstrap.min.js",
-        "dist/js/npm.js",
         "README.md",
         "LICENSE"
       ]
     },
     {
-      "library": "office-ui-fabric-core@11.0.0",
+      "library": "office-ui-fabric-core@11.1.0",
       "destination": "wwwroot/lib/office-ui-fabric-core/",
       "files": [
-        "dist/css/fabric-11.0.0.scoped.css",
-        "dist/css/fabric-11.0.0.scoped.min.css",
+        "dist/css/fabric-11.1.0.scoped.css",
+        "dist/css/fabric-11.1.0.scoped.min.css",
         "dist/css/fabric.css",
         "dist/css/fabric.min.css",
         "LICENSE",
@@ -39,7 +28,7 @@
       ]
     },
     {
-      "library": "alpinejs@2.8.1",
+      "library": "alpinejs@3.13.5",
       "destination": "wwwroot/lib/alpinejs/",
       "files": [
         "dist/alpine-ie11.js",
@@ -49,8 +38,8 @@
       ]
     },
     {
-      "library": "jquery@3.5.1",
-      "destination": "wwwroot/lib/jquery",
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/lib/jquery/",
       "files": [
         "dist/jquery.js",
         "dist/jquery.min.js",
