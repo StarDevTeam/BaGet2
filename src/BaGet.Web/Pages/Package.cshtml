@@ -3,8 +3,8 @@
 
 @{
     ViewData["Title"] = Model.Found
-        ? Model.Package.Id + " " + Model.Package.NormalizedVersionString
-        : Model.Package.Id;
+    ? Model.Package.Id + " " + Model.Package.NormalizedVersionString
+    : Model.Package.Id;
 }
 
 @if (!Model.Found)
@@ -61,33 +61,33 @@ else
             </div>
 
             @{
-                ExpandableSection(
-                    "Readme",
-                    expanded: false,
-                    @<div>
+            ExpandableSection(
+                "Readme",
+                expanded: false,
+                @<div>
                         @if (Model.Readme == null)
-                        {
-                            <div class="package-description">@Model.Package.Description</div>
-                        }
-                        else
-                        {
-                            <div class="package-readme">@Model.Readme</div>
-                        }
+                    {
+                        <div class="package-description">@Model.Package.Description</div>
+                    }
+                    else
+                    {
+                        <div class="package-readme">@Model.Readme</div>
+                    }
                     </div>);
-            }
+        }
 
             @if (!Model.IsDotnetTemplate && !Model.IsDotnetTool)
-            {
-                ExpandableSection("Used By", expanded: false,
-                    @<div class="package-used-by">
+        {
+            ExpandableSection("Used By", expanded: false,
+                @<div class="package-used-by">
                         @if (!Model.UsedBy.Any())
-                        {
-                            <p>No packages depend on @Model.Package.Id.</p>
-                        }
-                        else
-                        {
-                            <p>Showing the top 20 packages that depend on @Model.Package.Id.</p>
-                            <div>
+                    {
+                        <p>No packages depend on @Model.Package.Id.</p>
+                    }
+                    else
+                    {
+                        <p>Showing the top 20 packages that depend on @Model.Package.Id.</p>
+                        <div>
                                 <table>
                                     <thead>
                                         <tr>
@@ -97,8 +97,8 @@ else
                                     </thead>
                                     <tbody>
                                         @foreach (var package in Model.UsedBy)
-                                        {
-                                            <tr>
+                                    {
+                                        <tr>
                                                 <td>
                                                     <a href="@Url.Page("/Package", new { package.Id })">@package.Id</a>
                                                     <div>@package.Description</div>
@@ -108,46 +108,46 @@ else
                                                     <span>@package.TotalDownloads.ToString("N0")</span>
                                                 </td>
                                             </tr>
-                                        }
+                                    }
                                     </tbody>
                                 </table>
                             </div>
-                        }
+                    }
                     </div>);
-            }
+        }
 
             @if (!string.IsNullOrEmpty(Model.Package.ReleaseNotes))
-            {
-                ExpandableSection("Release Notes", expanded: false,
-                    @<div class="package-release-notes">@Model.Package.ReleaseNotes</div>);
-            }
+        {
+            ExpandableSection("Release Notes", expanded: false,
+                @<div class="package-release-notes">@Model.Package.ReleaseNotes</div>);
+        }
 
             @{ ExpandableSection(
-                "Dependencies",
-                expanded: false,
-                @<div class="dependency-groups">
+            "Dependencies",
+            expanded: false,
+            @<div class="dependency-groups">
                     @if (!Model.DependencyGroups.Any())
+                {
+                    @:This package has no dependencies.
+                }
+                else
+                {
+                    foreach (var group in Model.DependencyGroups)
                     {
-                        @:This package has no dependencies.
-                    }
-                    else
-                    {
-                        foreach (var group in Model.DependencyGroups)
-                        {
-                            <h4>
+                        <h4>
                                 <span>@group.Name</span>
                             </h4>
 
-                            <ul class="list-unstyled dependency-group">
+                        <ul class="list-unstyled dependency-group">
                                 @if (!group.Dependencies.Any())
+                            {
+                                <li>No dependencies.</li>
+                            }
+                            else
+                            {
+                                @foreach (var dependency in group.Dependencies)
                                 {
-                                    <li>No dependencies.</li>
-                                }
-                                else
-                                {
-                                    @foreach (var dependency in group.Dependencies)
-                                    {
-                                        <li>
+                                    <li>
                                             <a asp-page="Package"
                                                asp-route-id="@dependency.PackageId"
                                                asp-route-version="@null">
@@ -156,16 +156,16 @@ else
 
                                             <span> @dependency.VersionSpec</span>
                                         </li>
-                                    }
                                 }
+                            }
                             </ul>
-                        }
                     }
+                }
                 </div>);
-            }
+        }
 
             @{ ExpandableSection("Versions", expanded: true,
-                @<div class="version-list" x-data="{ showAll: false }">
+            @<div class="version-list" x-data="{ showAll: false }">
                     <table class="table borderless">
                         <thead>
                             <tr>
@@ -176,29 +176,29 @@ else
                         </thead>
                         <tbody class="no-border">
                             @for (var i = 0; i < Model.Versions.Count; i++)
-                            {
-                                var version = Model.Versions[i];
-                                var alwaysShow = Json.Serialize(i < DefaultVisibleVersions);
+                        {
+                            var version = Model.Versions[i];
+                            var alwaysShow = Json.Serialize(i < DefaultVisibleVersions);
 
-                                <tr class="@(version.Selected ? "bg-info" : "")" x-show="showAll || @alwaysShow">
+                            <tr class="@(version.Selected ? "bg-info" : "")" x-show="showAll || @alwaysShow">
                                     <td><a asp-page="Package" asp-route-version="@version.Version">@version.Version.ToNormalizedString()</a></td>
                                     <td>@version.Downloads.ToString("N0")</td>
                                     <td>@version.LastUpdated.ToShortDateString()</td>
                                 </tr>
-                            }
+                        }
                         </tbody>
                     </table>
 
                     @if (Model.Versions.Count > DefaultVisibleVersions)
-                    {
-                        <button type="button" class="link-button" @@click="showAll = !showAll">
+                {
+                    <button type="button" class="link-button" @@click="showAll = !showAll">
                             <i class="ms-Icon" x-bind:class="{ 'ms-Icon--CalculatorAddition': !showAll, 'ms-Icon--CalculatorSubtract': showAll }"></i>
                             <span x-text="showAll ? 'Show less' : 'Show more'"></span>
                         </button>
-                    }
+                }
 
                 </div>);
-            }
+        }
         </article>
 
         <aside class="col-sm-3 package-details-info">
@@ -212,28 +212,28 @@ else
                     </li>
 
                     @if (Model.Package.ProjectUrlString != null)
-                    {
-                        <li>
+                {
+                    <li>
                             <i class="ms-Icon ms-Icon--Globe"></i>
                             <a href="@Model.Package.ProjectUrlString">Project URL</a>
                         </li>
-                    }
+                }
 
                     @if (Model.Package.RepositoryUrlString != null)
-                    {
-                        <li>
+                {
+                    <li>
                             <img class="icon" aria-hidden="true" alt="GitHub logo" src="@Url.Content("~/_content/BaGet.Web/images/github-32x32.png")" />
                             <a href="@Model.Package.RepositoryUrlString">Source code</a>
                         </li>
-                    }
+                }
 
                     @if (Model.LicenseUrl != null)
-                    {
-                        <li>
+                {
+                    <li>
                             <i class="ms-Icon ms-Icon--Certificate"></i>
                             <a href="@Model.LicenseUrl">License</a>
                         </li>
-                    }
+                }
 
                     <li>
                         <i class="ms-Icon ms-Icon--CloudDownload"></i>
@@ -259,13 +259,13 @@ else
             </div>
 
             @if (Model.Package.Authors.Any())
-            {
-                <div>
+        {
+            <div>
                     <h2>Authors</h2>
 
                     <p>@string.Join(", ", Model.Package.Authors)</p>
                 </div>
-            }
+        }
         </aside>
     </div>
 }
@@ -275,28 +275,28 @@ else
     <script type="text/javascript">
         let tabs = [
             @if (Model.IsDotnetTemplate)
-            {
-                <text>
+        {
+            <text>
                 {
                     name: ".NET CLI",
                     prefix: ">",
                     content: ["dotnet new --install @Model.Package.Id::@Model.Package.NormalizedVersionString"],
                 },
                 </text>
-            }
-            else if (Model.IsDotnetTool)
-            {
-                <text>
+        }
+        else if (Model.IsDotnetTool)
+        {
+            <text>
                 {
                     name: ".NET CLI",
                     prefix: ">",
                     content: ["dotnet tool install --global @Model.Package.Id --version @Model.Package.NormalizedVersionString"],
                 },
                 </text>
-            }
-            else
-            {
-                <text>
+        }
+        else
+        {
+            <text>
                 {
                     name: ".NET CLI",
                     prefix: ">",
@@ -318,18 +318,18 @@ else
                     content: ["Install-Package @Model.Package.Id -Version @Model.Package.NormalizedVersionString"]
                 }
                 </text>
-            }
+        }
         ];
     </script>
 }
 
 @functions {
 
-    private const int DefaultVisibleVersions = 5;
+private const int DefaultVisibleVersions = 5;
 
-    private void ExpandableSection(string title, bool expanded, Func<object, IHtmlContent> template)
-    {
-        <div class="expandable-section" x-data="{ expanded: @Json.Serialize(expanded) }">
+private void ExpandableSection(string title, bool expanded, Func<object, IHtmlContent> template)
+{
+    <div class="expandable-section" x-data="{ expanded: @Json.Serialize(expanded) }">
             <h2>
                 <button type="button" class="link-button" @@click="expanded = !expanded">
                     <i x-bind:class="{ 'ms-Icon--ChevronDown': expanded, 'ms-Icon--ChevronRight': !expanded }"
@@ -341,5 +341,5 @@ else
 
             <div x-show="expanded">@template(null)</div>
         </div>
-    }
+}
 }
