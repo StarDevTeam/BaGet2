@@ -38,9 +38,10 @@ namespace BaGet.Tests
 
             var sourceUri = new Uri(_app.Server.BaseAddress, "v3/index.json");
             var packageSource = new PackageSource(sourceUri.AbsoluteUri);
-            var providers = new List<Lazy<INuGetResourceProvider>>();
-
-            providers.Add(new Lazy<INuGetResourceProvider>(() => new HttpSourceResourceProviderTestHost(_client)));
+            var providers = new List<Lazy<INuGetResourceProvider>>
+            {
+                new Lazy<INuGetResourceProvider>(() => new HttpSourceResourceProviderTestHost(_client))
+            };
             providers.AddRange(Repository.Provider.GetCoreV3());
 
             _repository = new SourceRepository(packageSource, providers);
@@ -200,7 +201,7 @@ namespace BaGet.Tests
         {
             await _app.AddPackageAsync(_packageStream);
 
-            using var packageStream = new MemoryStream();
+            await using var packageStream = new MemoryStream();
 
             var version = NuGetVersion.Parse(packageVersion);
             var resource = await _repository.GetResourceAsync<FindPackageByIdResource>();

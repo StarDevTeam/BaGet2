@@ -15,14 +15,9 @@ namespace BaGet.Web;
 /// The Package Metadata resource, used to fetch packages' information.
 /// See: https://docs.microsoft.com/en-us/nuget/api/registration-base-url-resource
 /// </summary>
-public class PackageMetadataController : Controller
+public class PackageMetadataController(IPackageMetadataService metadata) : Controller
 {
-    private readonly IPackageMetadataService _metadata;
-
-    public PackageMetadataController(IPackageMetadataService metadata)
-    {
-        _metadata = metadata ?? throw new ArgumentNullException(nameof(metadata));
-    }
+    private readonly IPackageMetadataService _metadata = metadata ?? throw new ArgumentNullException(nameof(metadata));
 
     // GET v3/registration/{id}.json
     [HttpGet]

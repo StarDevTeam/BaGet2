@@ -15,7 +15,7 @@ using Xunit;
 
 namespace BaGet.Core.Tests
 {
-    public class PackageServiceTests
+    public static class PackageServiceTests
     {
         public class FindPackageVersionsAsync : FactsBase
         {
@@ -334,7 +334,7 @@ namespace BaGet.Core.Tests
                     .Setup(p => p.ExistsAsync(_id, _version, _cancellationToken))
                     .ReturnsAsync(false);
 
-                using (var downloadStream = new MemoryStream())
+                await using (var downloadStream = new MemoryStream())
                 {
                     _upstream
                         .Setup(u => u.DownloadPackageOrNullAsync(_id, _version, _cancellationToken))

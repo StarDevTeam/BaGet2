@@ -22,7 +22,7 @@ namespace BaGet.Core
 
         public const int MaxPackageDependencyVersionRangeLength = 256;
 
-        public AbstractContext(DbContextOptions<TContext> options)
+        protected AbstractContext(DbContextOptions<TContext> options)
             : base(options)
         { }
 

@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8</TargetFramework>
+		<LangVersion>latest</LangVersion>
 
 		<PackageTags>NuGet;Protocol</PackageTags>
 		<Description>Libraries to interact with NuGet server APIs.</Description>

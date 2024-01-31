@@ -1,25 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net8</TargetFrameworks>
+	<PropertyGroup>
+		<TargetFrameworks>net8</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
 
-    <PackageTags>NuGet;Azure;Cloud</PackageTags>
-    <Description>The libraries to host BaGet on Azure.</Description>
-  </PropertyGroup>
+		<PackageTags>NuGet;Azure;Cloud</PackageTags>
+		<Description>The libraries to host BaGet on Azure.</Description>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
-    <PackageReference Include="Microsoft.Azure.Search" Version="10.1.0" />
-    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.2.3" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
+		<PackageReference Include="Microsoft.Azure.Search" Version="10.1.0" />
+		<PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.2.3" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BaGet.Core\BaGet.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\BaGet.Core\BaGet.Core.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+	</ItemGroup>
 
 </Project>

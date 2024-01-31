@@ -34,10 +34,7 @@ namespace BaGet.Core
             IOptionsSnapshot<MirrorOptions> options,
             ILogger logger)
         {
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            ArgumentNullException.ThrowIfNull(options);
 
             if (options.Value?.PackageSource?.AbsolutePath == null)
             {

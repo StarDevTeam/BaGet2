@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 namespace BaGet.Protocol.Models
 {
     /// This class is based off https://github.com/NuGet/NuGet.Services.Metadata/blob/64af0b59c5a79e0143f0808b39946df9f16cb2e7/src/NuGet.Protocol.Catalog/Models/PackageDetailsCatalogLeaf.cs
-
     /// <summary>
     /// A "package details" catalog leaf. Represents a single package create or update event.
     /// <see cref="PackageDetailsCatalogLeaf"/>s can be discovered from a <see cref="CatalogPage"/>.

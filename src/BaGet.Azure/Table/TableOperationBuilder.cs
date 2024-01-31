@@ -16,7 +16,7 @@ namespace BaGet.Azure
     {
         public TableOperation AddPackage(Package package)
         {
-            if (package == null) throw new ArgumentNullException(nameof(package));
+            ArgumentNullException.ThrowIfNull(package);
 
             var version = package.Version;
             var normalizedVersion = version.ToNormalizedString();

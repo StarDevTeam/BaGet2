@@ -12,15 +12,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BaGet.Web;
 
-public class IndexModel : PageModel
+public class IndexModel(ISearchService search) : PageModel
 {
-    private readonly ISearchService _search;
-
-    public IndexModel(ISearchService search)
-    {
-        _search = search ?? throw new ArgumentNullException(nameof(search));
-    }
-
+    private readonly ISearchService _search = search ?? throw new ArgumentNullException(nameof(search));
     public const int ResultsPerPage = 20;
 
     [BindProperty(Name = "q", SupportsGet = true)]

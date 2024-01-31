@@ -21,8 +21,7 @@ namespace BaGet.Aws
 
         public S3StorageService(IOptionsSnapshot<S3StorageOptions> options, AmazonS3Client client)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
+            ArgumentNullException.ThrowIfNull(options);
 
             _bucket = options.Value.Bucket;
             _prefix = options.Value.Prefix;
@@ -45,7 +44,7 @@ namespace BaGet.Aws
             {
                 using (var request = await _client.GetObjectAsync(_bucket, PrepareKey(path), cancellationToken))
                 {
-                    await request.ResponseStream.CopyToAsync(stream);
+                    await request.ResponseStream.CopyToAsync(stream, cancellationToken);
                 }
 
                 stream.Seek(0, SeekOrigin.Begin);
@@ -77,7 +76,7 @@ namespace BaGet.Aws
             // TODO: Uploads should be idempotent. This should fail if and only if the blob
             // already exists but has different content.
 
-            using (var seekableContent = new MemoryStream())
+            await using (var seekableContent = new MemoryStream())
             {
                 await content.CopyToAsync(seekableContent, 4096, cancellationToken);
 

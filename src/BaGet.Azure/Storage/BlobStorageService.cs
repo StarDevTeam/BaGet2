@@ -67,7 +67,7 @@ namespace BaGet.Azure
             }
             catch (StorageException e) when (e.IsAlreadyExistsException())
             {
-                using (var targetStream = await blob.OpenReadAsync(cancellationToken))
+                await using (var targetStream = await blob.OpenReadAsync(cancellationToken))
                 {
                     content.Position = 0;
                     return content.Matches(targetStream)

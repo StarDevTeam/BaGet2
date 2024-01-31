@@ -30,7 +30,7 @@ namespace BaGet.Protocol
                 // this does not validate that the response's content type indicates JSON content.
                 response.EnsureSuccessStatusCode();
 
-                using (var stream = await response.Content.ReadAsStreamAsync())
+                await using (var stream = await response.Content.ReadAsStreamAsync())
                 {
                     return await JsonSerializer.DeserializeAsync<TResult>(stream, cancellationToken: cancellationToken);
                 }
@@ -63,7 +63,7 @@ namespace BaGet.Protocol
 
                 response.EnsureSuccessStatusCode();
 
-                using (var stream = await response.Content.ReadAsStreamAsync())
+                await using (var stream = await response.Content.ReadAsStreamAsync())
                 {
                     return await JsonSerializer.DeserializeAsync<TResult>(stream, cancellationToken: cancellationToken);
                 }

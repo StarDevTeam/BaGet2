@@ -12,7 +12,7 @@ using Xunit;
 
 namespace BaGet.Core.Tests.Services
 {
-    public class FileStorageServiceTests
+    public static class FileStorageServiceTests
     {
         public class GetAsync : FactsBase
         {
@@ -40,7 +40,7 @@ namespace BaGet.Core.Tests.Services
             public async Task GetsStream()
             {
                 // Arrange
-                using (var content = StringStream("Hello world"))
+                await using (var content = StringStream("Hello world"))
                 {
                     await _target.PutAsync("hello.txt", content, "text/plain");
                 }
@@ -91,7 +91,7 @@ namespace BaGet.Core.Tests.Services
             public async Task SavesContent()
             {
                 StoragePutResult result;
-                using (var content = StringStream("Hello world"))
+                await using (var content = StringStream("Hello world"))
                 {
                     result = await _target.PutAsync("test.txt", content, "text/plain");
                 }
@@ -113,7 +113,7 @@ namespace BaGet.Core.Tests.Services
                 File.WriteAllText(path, "Hello world");
 
                 StoragePutResult result;
-                using (var content = StringStream("Hello world"))
+                await using (var content = StringStream("Hello world"))
                 {
                     // Act
                     result = await _target.PutAsync("test.txt", content, "text/plain");
@@ -133,7 +133,7 @@ namespace BaGet.Core.Tests.Services
                 File.WriteAllText(path, "Hello world");
 
                 StoragePutResult result;
-                using (var content = StringStream("foo bar"))
+                await using (var content = StringStream("foo bar"))
                 {
                     // Act
                     result = await _target.PutAsync("test.txt", content, "text/plain");
@@ -148,7 +148,7 @@ namespace BaGet.Core.Tests.Services
             {
                 foreach (var path in OutsideStorePathData)
                 {
-                    using (var content = StringStream("Hello world"))
+                    await using (var content = StringStream("Hello world"))
                     {
                         await Assert.ThrowsAsync<ArgumentException>(async () =>
                             await _target.PutAsync(path, content, "text/plain"));

@@ -17,7 +17,7 @@ using Xunit;
 
 namespace BaGet.Core.Tests
 {
-    public class V3UpstreamClientTests
+    public static class V3UpstreamClientTests
     {
         public class ListPackageVersionsAsync : FactsBase
         {

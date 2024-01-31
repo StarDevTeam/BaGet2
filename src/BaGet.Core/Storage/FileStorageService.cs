@@ -19,7 +19,7 @@ namespace BaGet.Core
 
         public FileStorageService(IOptionsSnapshot<FileSystemStorageOptions> options)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
+            ArgumentNullException.ThrowIfNull(options);
 
             // Resolve relative path components ('.'/'..') and ensure there is a trailing slash.
             _storePath = Path.GetFullPath(options.Value.Path);
@@ -52,7 +52,7 @@ namespace BaGet.Core
             string contentType,
             CancellationToken cancellationToken = default)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            ArgumentNullException.ThrowIfNull(content);
             if (string.IsNullOrEmpty(contentType)) throw new ArgumentException("Content type is required", nameof(contentType));
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -64,7 +64,7 @@ namespace BaGet.Core
 
             try
             {
-                using (var fileStream = File.Open(path, FileMode.CreateNew))
+                await using (var fileStream = File.Open(path, FileMode.CreateNew))
                 {
                     await content.CopyToAsync(fileStream, DefaultCopyBufferSize, cancellationToken);
                     return StoragePutResult.Success;
@@ -72,7 +72,7 @@ namespace BaGet.Core
             }
             catch (IOException) when (File.Exists(path))
             {
-                using (var targetStream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                await using (var targetStream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     content.Position = 0;
                     return content.Matches(targetStream)

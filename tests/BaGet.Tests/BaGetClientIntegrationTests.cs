@@ -160,8 +160,8 @@ namespace BaGet.Tests
             {
                 var version = NuGetVersion.Parse(packageVersion);
 
-                using var memoryStream = new MemoryStream();
-                using var packageStream = await _client.DownloadPackageAsync(packageId, version);
+                await using var memoryStream = new MemoryStream();
+                await using var packageStream = await _client.DownloadPackageAsync(packageId, version);
 
                 await packageStream.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;
@@ -187,8 +187,8 @@ namespace BaGet.Tests
             {
                 var version = NuGetVersion.Parse(packageVersion);
 
-                using var memoryStream = new MemoryStream();
-                using var packageStream = await _client.DownloadPackageManifestAsync(packageId, version);
+                await using var memoryStream = new MemoryStream();
+                await using var packageStream = await _client.DownloadPackageManifestAsync(packageId, version);
 
                 await packageStream.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;

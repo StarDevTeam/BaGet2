@@ -206,12 +206,10 @@ namespace BaGet.Core
             {
                 return provider.GetRequiredService<DisabledUpstreamClient>();
             }
-
             else if (options.Value.Legacy)
             {
                 return provider.GetRequiredService<V2UpstreamClient>();
             }
-
             else
             {
                 return provider.GetRequiredService<V3UpstreamClient>();

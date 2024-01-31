@@ -7,7 +7,7 @@ using Xunit;
 
 namespace BaGet.Core.Tests.Services
 {
-    public class PackageDatabaseTests
+    public static class PackageDatabaseTests
     {
         public class AddAsync : FactsBase
         {

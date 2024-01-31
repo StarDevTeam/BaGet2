@@ -17,12 +17,12 @@ public class Sample03_Metadata
     public async Task GetAllPackageMetadata()
     {
         // Find the metadata for all versions of a package.
-        NuGetClient client = new NuGetClient("https://api.nuget.org/v3/index.json");
+        var client = new NuGetClient("https://api.nuget.org/v3/index.json");
 
         IReadOnlyList<PackageMetadata> items = await client.GetPackageMetadataAsync("Newtonsoft.Json");
         if (!items.Any())
         {
-            Console.WriteLine($"Package 'Newtonsoft.Json' does not exist");
+            Console.WriteLine("Package 'Newtonsoft.Json' does not exist");
             return;
         }
 
@@ -40,10 +40,10 @@ public class Sample03_Metadata
     public async Task GetPackageMetadata()
     {
         // Find the metadata for a single version of a package.
-        NuGetClient client = new NuGetClient("https://api.nuget.org/v3/index.json");
+        var client = new NuGetClient("https://api.nuget.org/v3/index.json");
 
         string packageId = "Newtonsoft.Json";
-        NuGetVersion packageVersion = new NuGetVersion("12.0.1");
+        var packageVersion = new NuGetVersion("12.0.1");
 
         PackageMetadata metadata = await client.GetPackageMetadataAsync(packageId, packageVersion);
 
@@ -56,12 +56,12 @@ public class Sample03_Metadata
     public async Task ListVersions()
     {
         // Find all versions of a package (including unlisted versions).
-        NuGetClient client = new NuGetClient("https://api.nuget.org/v3/index.json");
+        var client = new NuGetClient("https://api.nuget.org/v3/index.json");
 
         IReadOnlyList<NuGetVersion> packageVersions = await client.ListPackageVersionsAsync("Newtonsoft.Json", includeUnlisted: true);
         if (!packageVersions.Any())
         {
-            Console.WriteLine($"Package 'Newtonsoft.Json' does not exist");
+            Console.WriteLine("Package 'Newtonsoft.Json' does not exist");
             return;
         }
 

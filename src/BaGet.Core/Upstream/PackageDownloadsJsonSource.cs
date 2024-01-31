@@ -34,9 +34,9 @@ namespace BaGet.Core
 
             var results = new Dictionary<string, Dictionary<string, long>>();
 
-            using (var downloadsStream = await GetDownloadsStreamAsync())
+            await using (var downloadsStream = await GetDownloadsStreamAsync())
             using (var downloadStreamReader = new StreamReader(downloadsStream))
-            using (var jsonReader = new JsonTextReader(downloadStreamReader))
+            await using (var jsonReader = new JsonTextReader(downloadStreamReader))
             {
                 _logger.LogInformation("Parsing package downloads...");
 
@@ -97,7 +97,7 @@ namespace BaGet.Core
 
             response.EnsureSuccessStatusCode();
 
-            using (var networkStream = await response.Content.ReadAsStreamAsync())
+            await using (var networkStream = await response.Content.ReadAsStreamAsync())
             {
                 await networkStream.CopyToAsync(fileStream);
             }

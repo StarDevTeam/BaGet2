@@ -15,7 +15,7 @@ using Xunit;
 
 namespace BaGet.Core.Tests.Services
 {
-    public class PackageStorageServiceTests
+    public static class PackageStorageServiceTests
     {
         public class SavePackageContentAsync : FactsBase
         {
@@ -61,10 +61,10 @@ namespace BaGet.Core.Tests.Services
                 // Arrange
                 SetupPutResult(StoragePutResult.Success);
 
-                using (var packageStream = StringStream("My package"))
-                using (var nuspecStream = StringStream("My nuspec"))
-                using (var readmeStream = StringStream("My readme"))
-                using (var iconStream = StringStream("My icon"))
+                await using (var packageStream = StringStream("My package"))
+                await using (var nuspecStream = StringStream("My nuspec"))
+                await using (var readmeStream = StringStream("My readme"))
+                await using (var iconStream = StringStream("My icon"))
                 {
                     // Act
                     await _target.SavePackageContentAsync(
@@ -99,8 +99,8 @@ namespace BaGet.Core.Tests.Services
                 // Arrange
                 SetupPutResult(StoragePutResult.Success);
 
-                using (var packageStream = StringStream("My package"))
-                using (var nuspecStream = StringStream("My nuspec"))
+                await using (var packageStream = StringStream("My package"))
+                await using (var nuspecStream = StringStream("My nuspec"))
                 {
                     // Act
                     await _target.SavePackageContentAsync(
@@ -122,10 +122,10 @@ namespace BaGet.Core.Tests.Services
                 SetupPutResult(StoragePutResult.Success);
 
                 _package.Version = new NuGetVersion("1.2.3.0");
-                using (var packageStream = StringStream("My package"))
-                using (var nuspecStream = StringStream("My nuspec"))
-                using (var readmeStream = StringStream("My readme"))
-                using (var iconStream = StringStream("My icon"))
+                await using (var packageStream = StringStream("My package"))
+                await using (var nuspecStream = StringStream("My nuspec"))
+                await using (var readmeStream = StringStream("My readme"))
+                await using (var iconStream = StringStream("My icon"))
                 {
                     // Act
                     await _target.SavePackageContentAsync(
@@ -148,10 +148,10 @@ namespace BaGet.Core.Tests.Services
                 // Arrange
                 SetupPutResult(StoragePutResult.AlreadyExists);
 
-                using (var packageStream = StringStream("My package"))
-                using (var nuspecStream = StringStream("My nuspec"))
-                using (var readmeStream = StringStream("My readme"))
-                using (var iconStream = StringStream("My icon"))
+                await using (var packageStream = StringStream("My package"))
+                await using (var nuspecStream = StringStream("My nuspec"))
+                await using (var readmeStream = StringStream("My readme"))
+                await using (var iconStream = StringStream("My icon"))
                 {
                     await _target.SavePackageContentAsync(
                         _package,
@@ -185,10 +185,10 @@ namespace BaGet.Core.Tests.Services
                 // Arrange
                 SetupPutResult(StoragePutResult.Conflict);
 
-                using (var packageStream = StringStream("My package"))
-                using (var nuspecStream = StringStream("My nuspec"))
-                using (var readmeStream = StringStream("My readme"))
-                using (var iconStream = StringStream("My icon"))
+                await using (var packageStream = StringStream("My package"))
+                await using (var nuspecStream = StringStream("My nuspec"))
+                await using (var readmeStream = StringStream("My readme"))
+                await using (var iconStream = StringStream("My icon"))
                 {
                     // Act
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
@@ -223,7 +223,7 @@ namespace BaGet.Core.Tests.Services
             {
                 // Arrange
                 var cancellationToken = CancellationToken.None;
-                using (var packageStream = StringStream("My package"))
+                await using (var packageStream = StringStream("My package"))
                 {
                     _storage
                         .Setup(s => s.GetAsync(PackagePath, cancellationToken))
@@ -261,7 +261,7 @@ namespace BaGet.Core.Tests.Services
             {
                 // Arrange
                 var cancellationToken = CancellationToken.None;
-                using (var nuspecStream = StringStream("My nuspec"))
+                await using (var nuspecStream = StringStream("My nuspec"))
                 {
                     _storage
                         .Setup(s => s.GetAsync(NuspecPath, cancellationToken))
@@ -299,7 +299,7 @@ namespace BaGet.Core.Tests.Services
             {
                 // Arrange
                 var cancellationToken = CancellationToken.None;
-                using (var readmeStream = StringStream("My readme"))
+                await using (var readmeStream = StringStream("My readme"))
                 {
                     _storage
                         .Setup(s => s.GetAsync(ReadmePath, cancellationToken))

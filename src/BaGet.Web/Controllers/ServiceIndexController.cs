@@ -12,14 +12,9 @@ namespace BaGet.Web;
 /// <summary>
 /// The NuGet Service Index. This aids NuGet client to discover this server's services.
 /// </summary>
-public class ServiceIndexController : Controller
+public class ServiceIndexController(IServiceIndexService serviceIndex) : Controller
 {
-    private readonly IServiceIndexService _serviceIndex;
-
-    public ServiceIndexController(IServiceIndexService serviceIndex)
-    {
-        _serviceIndex = serviceIndex ?? throw new ArgumentNullException(nameof(serviceIndex));
-    }
+    private readonly IServiceIndexService _serviceIndex = serviceIndex ?? throw new ArgumentNullException(nameof(serviceIndex));
 
     // GET v3/index
     [HttpGet]

@@ -21,8 +21,7 @@ namespace BaGet.Gcp
 
         public GoogleCloudStorageService(IOptionsSnapshot<GoogleCloudStorageOptions> options)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
+            ArgumentNullException.ThrowIfNull(options);
 
             _bucketName = options.Value.BucketName;
         }
@@ -47,7 +46,7 @@ namespace BaGet.Gcp
         public async Task<StoragePutResult> PutAsync(string path, Stream content, string contentType, CancellationToken cancellationToken = default)
         {
             using (var storage = await StorageClient.CreateAsync())
-            using (var seekableContent = new MemoryStream())
+            await using (var seekableContent = new MemoryStream())
             {
                 await content.CopyToAsync(seekableContent, 65536, cancellationToken);
                 seekableContent.Position = 0;

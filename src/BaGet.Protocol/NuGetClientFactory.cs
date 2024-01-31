@@ -112,7 +112,6 @@ namespace BaGet.Protocol
             return new CatalogClient(this);
         }
 
-
         private Task<ServiceIndexResponse> GetServiceIndexAsync(CancellationToken cancellationToken = default)
         {
             return GetAsync(c => c.ServiceIndex, cancellationToken);

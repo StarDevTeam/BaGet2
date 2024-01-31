@@ -147,7 +147,7 @@ namespace BaGet.Core
 
             try
             {
-                using (var rawPdbStream = await symbolPackage.GetStreamAsync(pdbPath, cancellationToken))
+                await using (var rawPdbStream = await symbolPackage.GetStreamAsync(pdbPath, cancellationToken))
                 {
                     pdbStream = await rawPdbStream.AsTemporaryFileStreamAsync();
 

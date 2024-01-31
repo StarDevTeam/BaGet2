@@ -32,7 +32,7 @@ namespace BaGet.Core
         {
             try
             {
-                using (var downloadStream = await _client.DownloadPackageAsync(id, version, cancellationToken))
+                await using (var downloadStream = await _client.DownloadPackageAsync(id, version, cancellationToken))
                 {
                     return await downloadStream.AsTemporaryFileStreamAsync(cancellationToken);
                 }

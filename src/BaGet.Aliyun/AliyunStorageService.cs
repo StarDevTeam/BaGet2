@@ -20,8 +20,7 @@ namespace BaGet.Aliyun
 
         public AliyunStorageService(IOptionsSnapshot<AliyunStorageOptions> options, OssClient client)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
+            ArgumentNullException.ThrowIfNull(options);
 
             _bucket = options.Value.Bucket;
             _prefix = options.Value.Prefix;

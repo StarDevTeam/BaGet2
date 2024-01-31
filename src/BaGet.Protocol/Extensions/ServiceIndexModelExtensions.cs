@@ -11,15 +11,15 @@ namespace BaGet.Protocol
     public static class ServiceIndexModelExtensions
     {
         // See: https://github.com/NuGet/NuGet.Client/blob/e08358296db5bfa6f7f32d6f4ec8de288f3b0388/src/NuGet.Core/NuGet.Protocol/ServiceTypes.cs
-        private static readonly string Version200 = "/2.0.0";
-        private static readonly string Version300beta = "/3.0.0-beta";
-        private static readonly string Version300 = "/3.0.0";
-        private static readonly string Version340 = "/3.4.0";
-        private static readonly string Version360 = "/3.6.0";
-        private static readonly string Version470 = "/4.7.0";
-        private static readonly string Version490 = "/4.9.0";
-        private static readonly string Version500 = "/5.0.0";
-        private static readonly string Version510 = "/5.1.0";
+        private const string Version200 = "/2.0.0";
+        private const string Version300beta = "/3.0.0-beta";
+        private const string Version300 = "/3.0.0";
+        private const string Version340 = "/3.4.0";
+        private const string Version360 = "/3.6.0";
+        private const string Version470 = "/4.7.0";
+        private const string Version490 = "/4.9.0";
+        private const string Version500 = "/5.0.0";
+        private const string Version510 = "/5.1.0";
 
         private static readonly string[] Catalog = { "Catalog" + Version300 };
         private static readonly string[] SearchQueryService = { "SearchQueryService" + Version340, "SearchQueryService" + Version300beta, "SearchQueryService" };

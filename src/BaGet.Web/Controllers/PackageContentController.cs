@@ -15,14 +15,9 @@ namespace BaGet.Web;
 /// The Package Content resource, used to download content from packages.
 /// See: https://docs.microsoft.com/en-us/nuget/api/package-base-address-resource
 /// </summary>
-public class PackageContentController : Controller
+public class PackageContentController(IPackageContentService content) : Controller
 {
-    private readonly IPackageContentService _content;
-
-    public PackageContentController(IPackageContentService content)
-    {
-        _content = content ?? throw new ArgumentNullException(nameof(content));
-    }
+    private readonly IPackageContentService _content = content ?? throw new ArgumentNullException(nameof(content));
 
     public async Task<ActionResult<PackageVersionsResponse>> GetPackageVersionsAsync(string id, CancellationToken cancellationToken)
     {

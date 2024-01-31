@@ -7,14 +7,9 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace BaGet.Web;
 
 [HtmlTargetElement(Attributes = "nav-link")]
-public class NavLinkTagHelper : TagHelper
+public class NavLinkTagHelper(IHttpContextAccessor accessor) : TagHelper
 {
-    private readonly IHttpContextAccessor _accessor;
-
-    public NavLinkTagHelper(IHttpContextAccessor accessor)
-    {
-        _accessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
-    }
+    private readonly IHttpContextAccessor _accessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
 
     [HtmlAttributeName("asp-page")]
     public string Page { get; set; }

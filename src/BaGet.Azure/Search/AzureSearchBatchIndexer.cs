@@ -26,7 +26,7 @@ namespace BaGet.Azure
             SearchServiceClient searchClient,
             ILogger<AzureSearchBatchIndexer> logger)
         {
-            if (searchClient == null) throw new ArgumentNullException(nameof(searchClient));
+            ArgumentNullException.ThrowIfNull(searchClient);
 
             _indexClient = searchClient.Indexes.GetClient(PackageDocument.IndexName);
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -53,7 +53,6 @@ namespace BaGet.Azure
                     cancellationToken: cancellationToken);
 
                 _logger.LogInformation("Pushed batch of {DocumentCount} documents", batch.Count);
-
             }
             catch (IndexBatchException ex)
             {

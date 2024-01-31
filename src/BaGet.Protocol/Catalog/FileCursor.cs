@@ -29,7 +29,7 @@ namespace BaGet.Protocol.Catalog
         {
             try
             {
-                using (var file = File.OpenRead(_path))
+                await using (var file = File.OpenRead(_path))
                 {
                     var data = await JsonSerializer.DeserializeAsync<Data>(file, options: null, cancellationToken);
                     _logger.LogDebug("Read cursor value {cursor:O} from {path}.", data.Value, _path);

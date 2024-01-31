@@ -17,32 +17,24 @@ using NuGet.Versioning;
 
 namespace BaGet.Web;
 
-public class PackageModel : PageModel
+public class PackageModel(
+    IPackageService packages,
+    IPackageContentService content,
+    ISearchService search,
+    IUrlGenerator url) : PageModel
 {
     private static readonly MarkdownPipeline MarkdownPipeline;
 
-    private readonly IPackageService _packages;
-    private readonly IPackageContentService _content;
-    private readonly ISearchService _search;
-    private readonly IUrlGenerator _url;
+    private readonly IPackageService _packages = packages ?? throw new ArgumentNullException(nameof(packages));
+    private readonly IPackageContentService _content = content ?? throw new ArgumentNullException(nameof(content));
+    private readonly ISearchService _search = search ?? throw new ArgumentNullException(nameof(search));
+    private readonly IUrlGenerator _url = url ?? throw new ArgumentNullException(nameof(url));
 
     static PackageModel()
     {
         MarkdownPipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()
             .Build();
-    }
-
-    public PackageModel(
-        IPackageService packages,
-        IPackageContentService content,
-        ISearchService search,
-        IUrlGenerator url)
-    {
-        _packages = packages ?? throw new ArgumentNullException(nameof(packages));
-        _content = content ?? throw new ArgumentNullException(nameof(content));
-        _search = search ?? throw new ArgumentNullException(nameof(search));
-        _url = url ?? throw new ArgumentNullException(nameof(url));
     }
 
     public bool Found { get; private set; }
@@ -203,14 +195,12 @@ public class PackageModel : PageModel
         CancellationToken cancellationToken)
     {
         string readme;
-        using (var readmeStream = await _content.GetPackageReadmeStreamOrNullAsync(packageId, packageVersion, cancellationToken))
+        await using (var readmeStream = await _content.GetPackageReadmeStreamOrNullAsync(packageId, packageVersion, cancellationToken))
         {
             if (readmeStream == null) return null;
 
-            using (var reader = new StreamReader(readmeStream))
-            {
-                readme = await reader.ReadToEndAsync();
-            }
+            using var reader = new StreamReader(readmeStream);
+            readme = await reader.ReadToEndAsync();
         }
 
         var readmeHtml = Markdown.ToHtml(readme, MarkdownPipeline);

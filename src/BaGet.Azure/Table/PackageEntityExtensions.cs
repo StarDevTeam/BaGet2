@@ -55,33 +55,30 @@ namespace BaGet.Azure
         {
             // TODO: Convert to System.Text.Json
             return JsonConvert.DeserializeObject<List<DependencyModel>>(input)
-                .Select(e => new PackageDependency
+                .ConvertAll(e => new PackageDependency
                 {
                     Id = e.Id,
                     VersionRange = e.VersionRange,
                     TargetFramework = e.TargetFramework,
-                })
-                .ToList();
+                });
         }
 
         private static List<PackageType> ParsePackageTypes(string input)
         {
             // TODO: Convert to System.Text.Json
             return JsonConvert.DeserializeObject<List<PackageTypeModel>>(input)
-                .Select(e => new PackageType
+                .ConvertAll(e => new PackageType
                 {
                     Name = e.Name,
                     Version = e.Version
-                })
-                .ToList();
+                });
         }
 
         private static List<TargetFramework> ParseTargetFrameworks(string targetFrameworks)
         {
             // TODO: Convert to System.Text.Json
             return JsonConvert.DeserializeObject<List<string>>(targetFrameworks)
-                .Select(f => new TargetFramework { Moniker = f })
-                .ToList();
+                .ConvertAll(f => new TargetFramework { Moniker = f });
         }
     }
 }

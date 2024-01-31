@@ -12,7 +12,7 @@ namespace BaGet.Core
 
         public ApiKeyAuthenticationService(IOptionsSnapshot<BaGetOptions> options)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
+            ArgumentNullException.ThrowIfNull(options);
 
             _apiKey = string.IsNullOrEmpty(options.Value.ApiKey) ? null : options.Value.ApiKey;
         }

@@ -47,7 +47,7 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>());
+                .ReturnsAsync([]);
 
             await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
 
@@ -62,10 +62,10 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0", listed: false),
-                });
+                ]);
 
             await _target.OnGetAsync("testpackage", version: null, _cancellation);
 
@@ -80,12 +80,12 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0"),
                     CreatePackage("2.0.0"),
                     CreatePackage("3.0.0"),
-                });
+                ]);
 
             await _target.OnGetAsync("testpackage", "2.0.0", _cancellation);
 
@@ -107,12 +107,12 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0"),
                     CreatePackage("2.0.0", listed: false),
                     CreatePackage("3.0.0"),
-                });
+                ]);
 
             await _target.OnGetAsync("testpackage", "2.0.0", _cancellation);
 
@@ -132,12 +132,12 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0"),
                     CreatePackage("2.0.0"),
                     CreatePackage("3.0.0", listed: false),
-                });
+                ]);
 
             await _target.OnGetAsync("testpackage", "4.0.0", _cancellation);
 
@@ -162,10 +162,10 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0", packageTypes: packageTypes)
-                });
+                ]);
 
             await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
 
@@ -179,20 +179,20 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0")
-                });
+                ]);
 
             _search
                 .Setup(s => s.FindDependentsAsync("testpackage", _cancellation))
                 .ReturnsAsync(new DependentsResponse
                 {
-                    Data = new List<PackageDependent>
-                    {
+                    Data =
+                    [
                         new PackageDependent  { Id = "Used by 1" },
                         new PackageDependent  { Id = "Used by 2" },
-                    }
+                    ]
                 });
 
             await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
@@ -207,10 +207,10 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
-                    CreatePackage("1.0.0", dependencies: new[]
-                    {
+                .ReturnsAsync(
+                [
+                    CreatePackage("1.0.0", dependencies:
+                    [
                         new PackageDependency
                         {
                             TargetFramework = "net5.0",
@@ -229,8 +229,8 @@ namespace BaGet.Web.Tests
                             Id = "Dependency3",
                             VersionRange = "[3.0.0, )",
                         },
-                    })
-                });
+                    ])
+                ]);
 
             await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
 
@@ -240,7 +240,7 @@ namespace BaGet.Web.Tests
             Assert.Equal(".NET Framework 4.8", _target.DependencyGroups[1].Name);
 
             Assert.Equal(2, _target.DependencyGroups[0].Dependencies.Count);
-            Assert.Equal(1, _target.DependencyGroups[1].Dependencies.Count);
+            Assert.Single(_target.DependencyGroups[1].Dependencies);
 
             Assert.Equal("Dependency1", _target.DependencyGroups[0].Dependencies[0].PackageId);
             Assert.Equal("(>= 1.0.0)", _target.DependencyGroups[0].Dependencies[0].VersionSpec);
@@ -262,18 +262,18 @@ namespace BaGet.Web.Tests
         {
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
-                    CreatePackage("1.0.0", dependencies: new[]
-                    {
+                .ReturnsAsync(
+                [
+                    CreatePackage("1.0.0", dependencies:
+                    [
                        new PackageDependency
                        {
                            TargetFramework = targetFramework,
                            Id = "DependencyPackage",
                            VersionRange = "[1.0.0, )",
                        }
-                    })
-                });
+                    ])
+                ]);
 
             await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
 
@@ -289,11 +289,11 @@ namespace BaGet.Web.Tests
 
             _packages
                 .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                .ReturnsAsync(new List<Package>
-                {
+                .ReturnsAsync(
+                [
                     CreatePackage("1.0.0", downloads: 10, published: DateTime.Now.AddDays(-2)),
-                    CreatePackage("2.0.0", listed: false, downloads: 5, published: now),
-                });
+                    CreatePackage("2.0.0", downloads: 5, listed: false, published: now),
+                ]);
 
             await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
 
@@ -305,37 +305,35 @@ namespace BaGet.Web.Tests
         [Fact]
         public async Task RendersReadme()
         {
-            using (var readmeStream = new MemoryStream())
+            await using var readmeStream = new MemoryStream();
+            await using (var streamWriter = new StreamWriter(readmeStream, leaveOpen: true))
             {
-                using (var streamWriter = new StreamWriter(readmeStream, leaveOpen: true))
-                {
-                    await streamWriter.WriteLineAsync("# My readme");
-                    await streamWriter.WriteLineAsync("Hello world!");
-                    await streamWriter.FlushAsync();
-                }
-
-                readmeStream.Position = 0;
-
-                _packages
-                    .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
-                    .ReturnsAsync(new List<Package>
-                    {
-                        CreatePackage("1.0.0", hasReadme: true),
-                    });
-
-                _content
-                    .Setup(c => c.GetPackageReadmeStreamOrNullAsync(
-                        "testpackage",
-                        It.Is<NuGetVersion>(v => v.OriginalVersion == "1.0.0"),
-                        _cancellation))
-                    .ReturnsAsync(readmeStream);
-
-                await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
-
-                Assert.Equal(
-                    "<h1 id=\"my-readme\">My readme</h1>\n<p>Hello world!</p>\n",
-                    _target.Readme.Value);
+                await streamWriter.WriteLineAsync("# My readme");
+                await streamWriter.WriteLineAsync("Hello world!");
+                await streamWriter.FlushAsync();
             }
+
+            readmeStream.Position = 0;
+
+            _packages
+                .Setup(m => m.FindPackagesAsync("testpackage", _cancellation))
+                .ReturnsAsync(
+                [
+                        CreatePackage("1.0.0", hasReadme: true),
+                ]);
+
+            _content
+                .Setup(c => c.GetPackageReadmeStreamOrNullAsync(
+                    "testpackage",
+                    It.Is<NuGetVersion>(v => v.OriginalVersion == "1.0.0"),
+                    _cancellation))
+                .ReturnsAsync(readmeStream);
+
+            await _target.OnGetAsync("testpackage", "1.0.0", _cancellation);
+
+            Assert.Equal(
+                "<h1 id=\"my-readme\">My readme</h1>\n<p>Hello world!</p>\n",
+                _target.Readme.Value);
         }
 
         private Package CreatePackage(
@@ -347,9 +345,9 @@ namespace BaGet.Web.Tests
             IEnumerable<PackageDependency> dependencies = null,
             IEnumerable<string> packageTypes = null)
         {
-            published = published ?? DateTime.Now;
-            dependencies = dependencies ?? Array.Empty<PackageDependency>();
-            packageTypes = packageTypes ?? Array.Empty<string>();
+            published ??= DateTime.Now;
+            dependencies ??= [];
+            packageTypes ??= [];
 
             return new Package
             {

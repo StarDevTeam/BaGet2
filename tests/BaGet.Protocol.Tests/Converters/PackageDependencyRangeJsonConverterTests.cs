@@ -11,7 +11,7 @@ namespace BaGet.Protocol.Tests
         [Fact]
         public void DeserializesNull()
         {
-            var json = @"null";
+            var json = "null";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new PackageDependencyRangeJsonConverter());
@@ -48,10 +48,10 @@ namespace BaGet.Protocol.Tests
         }
 
         [Theory]
-        [InlineData(@"false")]
-        [InlineData(@"0")]
-        [InlineData(@"{")]
-        [InlineData(@"[")]
+        [InlineData("false")]
+        [InlineData("0")]
+        [InlineData("{")]
+        [InlineData("[")]
         [InlineData(@"[""hello""")]
         [InlineData(@"[""hello""}")]
         [InlineData(@"[""hello"", 1")]

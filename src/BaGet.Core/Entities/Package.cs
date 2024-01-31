@@ -68,7 +68,6 @@ namespace BaGet.Core
         public string NormalizedVersionString { get; set; }
         public string OriginalVersionString { get; set; }
 
-
         public string IconUrlString => IconUrl?.AbsoluteUri ?? string.Empty;
         public string LicenseUrlString => LicenseUrl?.AbsoluteUri ?? string.Empty;
         public string ProjectUrlString => ProjectUrl?.AbsoluteUri ?? string.Empty;

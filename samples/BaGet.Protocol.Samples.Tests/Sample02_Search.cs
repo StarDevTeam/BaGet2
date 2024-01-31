@@ -34,7 +34,7 @@ public class Sample02_Search
     public async Task Search()
     {
         // Search for packages that are relevant to "json".
-        NuGetClient client = new NuGetClient("https://api.nuget.org/v3/index.json");
+        var client = new NuGetClient("https://api.nuget.org/v3/index.json");
         IReadOnlyList<SearchResult> results = await client.SearchAsync("json");
 
         var index = 1;
@@ -55,7 +55,7 @@ public class Sample02_Search
     public async Task Autocomplete()
     {
         // Search for packages whose names' start with "Newt".
-        NuGetClient client = new NuGetClient("https://api.nuget.org/v3/index.json");
+        var client = new NuGetClient("https://api.nuget.org/v3/index.json");
         IReadOnlyList<string> packageIds = await client.AutocompleteAsync("Newt");
 
         foreach (string packageId in packageIds)

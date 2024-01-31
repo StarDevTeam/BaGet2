@@ -14,7 +14,7 @@ namespace BaGet.Core
         private static readonly string SearchTypeKey = $"{nameof(BaGetOptions.Search)}:{nameof(SearchOptions.Type)}";
         private static readonly string StorageTypeKey = $"{nameof(BaGetOptions.Storage)}:{nameof(StorageOptions.Type)}";
 
-        private static readonly string DatabaseSearchType = "Database";
+        private const string DatabaseSearchType = "Database";
 
         /// <summary>
         /// Add a new provider to the dependency injection container. The provider may

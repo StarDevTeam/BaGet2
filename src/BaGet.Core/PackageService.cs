@@ -109,7 +109,7 @@ namespace BaGet.Core
 
             try
             {
-                using (var packageStream = await _upstream.DownloadPackageOrNullAsync(id, version, cancellationToken))
+                await using (var packageStream = await _upstream.DownloadPackageOrNullAsync(id, version, cancellationToken))
                 {
                     if (packageStream == null)
                     {
