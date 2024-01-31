@@ -2,9 +2,12 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using BaGet.Protocol;
 using BaGet.Protocol.Models;
+
 using NuGet.Versioning;
+
 using Xunit;
 using Xunit.Abstractions;
 

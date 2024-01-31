@@ -4,9 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Core;
+
 using Moq;
+
 using NuGet.Versioning;
+
 using Xunit;
 
 namespace BaGet.Web.Tests

@@ -1,10 +1,13 @@
 using System;
 using System.Threading.Tasks;
+
 using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
+
 using BaGet.Aws;
 using BaGet.Core;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;

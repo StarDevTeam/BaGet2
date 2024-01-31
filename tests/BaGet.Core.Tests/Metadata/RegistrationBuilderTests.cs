@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using Moq;
+
 using NuGet.Versioning;
+
 using Xunit;
 
 namespace BaGet.Core.Tests.Metadata
@@ -52,7 +55,7 @@ namespace BaGet.Core.Tests.Metadata
         /// Create a fake <see cref="Package"></see> with the minimum metadata needed by the <see cref="RegistrationBuilder"></see>.
         /// </summary>
         private Package GetTestPackage(string packageId, string version)
-        {            
+        {
             return new Package
             {
                 Id = packageId,

@@ -1,7 +1,10 @@
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+
 using Moq;
+
 using Xunit;
 
 namespace BaGet.Core.Tests.Services

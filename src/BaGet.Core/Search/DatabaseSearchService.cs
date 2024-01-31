@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Protocol.Models;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace BaGet.Core
@@ -24,7 +26,7 @@ namespace BaGet.Core
             _searchBuilder = searchBuilder ?? throw new ArgumentNullException(nameof(searchBuilder));
         }
 
-        public async Task<SearchResponse> SearchAsync(SearchRequest request,  CancellationToken cancellationToken)
+        public async Task<SearchResponse> SearchAsync(SearchRequest request, CancellationToken cancellationToken)
         {
             var frameworks = GetCompatibleFrameworksOrNull(request.Framework);
 

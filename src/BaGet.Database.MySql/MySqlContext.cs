@@ -1,4 +1,5 @@
 using BaGet.Core;
+
 using Microsoft.EntityFrameworkCore;
 
 using MySqlConnector;

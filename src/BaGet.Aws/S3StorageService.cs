@@ -2,9 +2,12 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Amazon.S3;
 using Amazon.S3.Model;
+
 using BaGet.Core;
+
 using Microsoft.Extensions.Options;
 
 namespace BaGet.Aws

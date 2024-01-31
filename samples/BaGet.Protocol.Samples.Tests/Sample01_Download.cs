@@ -1,7 +1,9 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+
 using NuGet.Versioning;
+
 using Xunit;
 
 namespace BaGet.Protocol.Samples.Tests

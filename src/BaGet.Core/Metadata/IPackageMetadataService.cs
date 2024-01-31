@@ -1,6 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Protocol.Models;
+
 using NuGet.Versioning;
 
 namespace BaGet.Core

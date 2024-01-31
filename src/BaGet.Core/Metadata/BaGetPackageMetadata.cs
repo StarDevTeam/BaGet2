@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+
 using BaGet.Protocol.Models;
 
 namespace BaGet.Core

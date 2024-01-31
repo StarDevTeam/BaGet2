@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using Xunit;
 
 namespace BaGet.Core.Tests.Services

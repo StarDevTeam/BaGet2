@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+
 using BaGet.Protocol.Models;
 
 namespace BaGet.Core
@@ -15,13 +16,13 @@ namespace BaGet.Core
     /// </remarks>
     public class BaGetRegistrationIndexPageItem
     {
-#region Original properties from RegistrationIndexPageItem.
+        #region Original properties from RegistrationIndexPageItem.
         [JsonPropertyName("@id")]
         public string RegistrationLeafUrl { get; set; }
 
         [JsonPropertyName("packageContent")]
         public string PackageContentUrl { get; set; }
-#endregion
+        #endregion
 
         /// <summary>
         /// The catalog entry containing the package metadata.

@@ -1,5 +1,7 @@
 using System;
+
 using BaGet.Core;
+
 using Microsoft.Azure.Cosmos.Table;
 
 namespace BaGet.Azure

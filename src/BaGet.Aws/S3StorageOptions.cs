@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+
 using BaGet.Core;
 
 namespace BaGet.Aws

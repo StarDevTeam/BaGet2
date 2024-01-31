@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
+
 using BaGet.Protocol.Models;
+
 using Xunit;
 
 namespace BaGet.Core.Tests.Metadata

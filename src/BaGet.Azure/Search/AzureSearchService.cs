@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Core;
 using BaGet.Protocol.Models;
+
 using Microsoft.Azure.Search;
+
 using NuGet.Versioning;
 
 namespace BaGet.Azure
@@ -80,7 +83,7 @@ namespace BaGet.Azure
 
                 results.Add(new SearchResult
                 {
-                    PackageId =  document.Id,
+                    PackageId = document.Id,
                     Version = document.Version,
                     Description = document.Description,
                     Authors = document.Authors,

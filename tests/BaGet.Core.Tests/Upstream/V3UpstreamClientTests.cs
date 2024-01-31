@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Protocol;
 using BaGet.Protocol.Models;
+
 using Microsoft.Extensions.Logging;
+
 using Moq;
+
 using NuGet.Versioning;
+
 using Xunit;
 
 namespace BaGet.Core.Tests

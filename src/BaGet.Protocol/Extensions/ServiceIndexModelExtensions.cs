@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+
 using BaGet.Protocol.Models;
 
 namespace BaGet.Protocol

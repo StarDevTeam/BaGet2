@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using BaGet.Core;
+
 using Microsoft.Azure.Cosmos.Table;
+
 using Newtonsoft.Json;
+
 using NuGet.Versioning;
 
 namespace BaGet.Azure

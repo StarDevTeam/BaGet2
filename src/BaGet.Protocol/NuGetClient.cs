@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Protocol.Models;
+
 using NuGet.Versioning;
 
 namespace BaGet.Protocol
@@ -335,7 +337,7 @@ namespace BaGet.Protocol
             int take,
             CancellationToken cancellationToken = default)
         {
-            var response =  await _searchClient.SearchAsync(
+            var response = await _searchClient.SearchAsync(
                 query,
                 skip,
                 take,

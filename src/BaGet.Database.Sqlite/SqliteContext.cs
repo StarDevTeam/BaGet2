@@ -1,4 +1,5 @@
 using BaGet.Core;
+
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 

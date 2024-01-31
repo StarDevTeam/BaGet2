@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using BaGet.Protocol.Models;
 
 namespace BaGet.Core

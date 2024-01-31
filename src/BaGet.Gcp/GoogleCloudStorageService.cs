@@ -5,9 +5,12 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
+
 using BaGet.Core;
+
 using Google;
 using Google.Cloud.Storage.V1;
+
 using Microsoft.Extensions.Options;
 
 namespace BaGet.Gcp

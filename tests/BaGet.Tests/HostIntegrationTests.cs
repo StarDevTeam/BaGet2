@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+
 using BaGet.Core;
 using BaGet.Database.Sqlite;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using Xunit;
 
 namespace BaGet.Tests

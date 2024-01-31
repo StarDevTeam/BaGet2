@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Moq;
+
 using Xunit;
 
 namespace BaGet.Core.Tests.Services

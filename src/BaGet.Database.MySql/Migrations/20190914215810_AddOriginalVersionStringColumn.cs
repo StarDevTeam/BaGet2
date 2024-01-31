@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BaGet.Database.MySql.Migrations

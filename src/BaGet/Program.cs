@@ -1,8 +1,11 @@
 using System;
 using System.Threading.Tasks;
+
 using BaGet.Core;
 using BaGet.Web;
+
 using McMaster.Extensions.CommandLineUtils;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using BaGet.Protocol.Models;
+
 using NuGet.Versioning;
+
 using Xunit;
 
 namespace BaGet.Protocol.Samples.Tests

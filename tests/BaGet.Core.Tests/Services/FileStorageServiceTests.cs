@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+
 using Microsoft.Extensions.Options;
+
 using Moq;
+
 using Xunit;
 
 namespace BaGet.Core.Tests.Services
